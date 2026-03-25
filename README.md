@@ -19,7 +19,7 @@ Le système utilise un **point d'entrée unique (`index.php`)** agissant comme u
 ## 🛡️ Sécurité & Implémentation Technique
 
 ### 1. PDO & Requêtes Préparées
-Conformément aux objectifs techniques[cite: 12], l'interaction avec MySQL s'effectue via l'extension **PDO** :
+Conformément aux objectifs techniques, l'interaction avec MySQL s'effectue via l'extension **PDO** :
 * **Prévention des Injections SQL** : Utilisation systématique de `prepare()` et `execute()`. Les données utilisateurs ne sont jamais concaténées directement dans les requêtes.
 * **Transactions SQL** : La création d'une réservation impliquant plusieurs tables (`reservation` et `reservation_chambre`) est sécurisée par un bloc `try/catch` avec `beginTransaction()` et `commit()` pour garantir l'atomicité de l'opération.
 
@@ -35,14 +35,15 @@ La navigation est centralisée dans le fichier `nav.php`, inclus dynamiquement s
 
 ## 🧠 Logique Métier & Fonctions de Validation
 
-L'application intègre des règles de gestion strictes validées côté serveur[cite: 14, 80]:
+L'application intègre des règles de gestion strictes validées côté serveur:
 
 * **Vérification de la Majorité** : Lors de l'ajout d'un client, le système calcule l'âge via l'objet PHP `DateTime` pour bloquer l'enregistrement des mineurs.
 * **Vérification du Chevauchement (Overlap)** : Une fonction dédiée `isRoomAvailable()` vérifie qu'aucune chambre sélectionnée n'est déjà occupée sur la période demandée.
 * **Validation Chronologique** : 
-    * [cite_start]La date d'arrivée doit être strictement antérieure à la date de départ[cite: 81].
+    * La date d'arrivée doit être strictement antérieure à la date de départ.
     * La réservation ne peut pas être effectuée à une date passée (comparaison avec `date('Y-m-d')`).
-* **Contrainte de Sélection** : Une réservation doit obligatoirement comporter au moins une chambre associée[cite: 82].
+* **Contrainte de Sélection** : Une réservation doit obligatoirement comporter au moins une chambre associée[
+* .
 
 ---
 
